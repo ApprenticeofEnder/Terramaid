@@ -1,14 +1,15 @@
 {pkgs}:
-pkgs.buildGoModule rec {
+pkgs.buildGoApplication rec {
   pname = "terramaid";
   version = "2.6.2";
   src = ./.;
 
-  vendorHash = "sha256-rLIqrNgx8Vk4ijdSwGn5ye+6QYjiUYZ5zyogGx+fd/E=";
-
   subPackages = ["."];
 
   ldflags = ["-s" "-w" "-X=cmd.Version=${version}"];
+
+  go = pkgs.go-bin.latest;
+  modules = ./govendor.toml;
 
   meta = with pkgs.lib; {
     description = "A utility for generating Mermaid diagrams from Terraform configurations";
