@@ -8,8 +8,7 @@ pkgs.buildGoApplication rec {
 
   ldflags = ["-s" "-w" "-X=cmd.Version=${version}"];
 
-  go = pkgs.go-bin.latest;
-  modules = ./govendor.toml;
+  go = pkgs.go-bin.fromGoMod ./go.mod;
 
   meta = with pkgs.lib; {
     description = "A utility for generating Mermaid diagrams from Terraform configurations";
